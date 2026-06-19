@@ -386,7 +386,7 @@ function render(){
   buildTabs();
   const main=cur==="map"?mapHTML(who):cur==="history"?historyHTML(who):stopHTML(STOPS.find(s=>s.id===cur),who);
   $("body").innerHTML=sceneHTML(who)+main
-    +`<div class="footer">I <span style="color:var(--red)">♥</span> WEST SEATTLE</div>`;
+    +`<div class="footer">I <span style="color:var(--red)">♥</span> WEST SEATTLE · <a href="why.html" style="color:var(--blue);text-decoration:underline">Why these stops?</a></div>`;
 }
 function go(t){cur=t;render();}
 function onPlayer(){render();}

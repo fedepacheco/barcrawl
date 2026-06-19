@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Why These Stops? — West Seattle Bar Crawl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--shell:#5a3fa0;--shell-dark:#3b2870;--shell-light:#7a5cc8;--bezel:#15131f;
+  --lcd:#c8d99a;--lcd-dark:#9bb066;--lcd-deep:#5c7038;--ink:#21300f;--cream:#f4f7e3;
+  --gold:#f8b800;--red:#e83000;--accent:#e8407c;--blue:#2a7de1;--shadow:rgba(0,0,0,.35);}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'VT323',monospace;background:repeating-linear-gradient(45deg,#241a3f 0 14px,#221838 14px 28px);
+  color:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:10px;}
+.pix{font-family:'Pixelify Sans',sans-serif;font-weight:700;letter-spacing:.5px;}
+.device{width:100%;max-width:480px;background:linear-gradient(160deg,var(--shell-light),var(--shell) 40%,var(--shell-dark));
+  border-radius:18px 18px 46px 18px;padding:30px 14px 40px;box-shadow:0 14px 0 var(--shell-dark),0 22px 40px var(--shadow);position:relative;}
+.device::after{content:"GAME BOY COLOR";position:absolute;left:0;right:0;bottom:14px;text-align:center;
+  font-family:'Press Start 2P';font-size:8px;letter-spacing:1px;color:#d9c7ff;text-shadow:1px 1px 0 var(--shell-dark);}
+.brand-dot{position:absolute;top:11px;left:18px;display:flex;align-items:center;gap:6px;font-family:'Press Start 2P';font-size:6px;color:#e9deff;}
+.brand-dot b{width:8px;height:8px;border-radius:50%;background:#ff4d4d;display:inline-block;box-shadow:0 0 5px 1px rgba(255,70,70,.8);}
+.bezel{background:var(--bezel);border-radius:10px 10px 28px 10px;padding:30px 14px 14px;margin-top:6px;box-shadow:inset 0 0 0 3px #2a2640;}
+.screen{background:var(--lcd);border-radius:5px;overflow:hidden;box-shadow:inset 0 0 22px rgba(0,0,0,.25);position:relative;}
+.screen::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 2px,transparent 2px 4px);border-radius:5px;}
+header{background:linear-gradient(180deg,var(--lcd-dark),var(--lcd-deep));color:var(--cream);padding:11px 10px;border-bottom:3px solid var(--ink);text-align:center;}
+header .t{font-size:22px;text-shadow:2px 2px 0 var(--ink);line-height:1;}
+header .s{font-size:15px;color:var(--gold);margin-top:4px;}
+.back{display:inline-block;margin:10px 0 0 10px;font-family:'Pixelify Sans';font-weight:700;font-size:13px;color:var(--blue);text-decoration:none;}
+.body{padding:6px 14px 18px;}
+.body p{font-size:18px;line-height:1.32;color:#26340f;margin:0 0 14px;}
+.body p .pix{color:var(--red);}
+.lead{font-family:'Pixelify Sans';font-weight:700;font-size:15px;color:var(--accent);margin:6px 0 12px;}
+.sign{font-family:'Pixelify Sans';font-weight:700;font-size:16px;color:var(--ink);margin-top:4px;border-top:2px dashed var(--lcd-dark);padding-top:10px;}
+.footer{font-family:'Pixelify Sans';font-weight:600;font-size:11px;color:var(--lcd-deep);text-align:center;line-height:1.7;margin-top:8px;padding-top:8px;border-top:2px dashed var(--lcd-dark);}
+.dpad{position:absolute;bottom:20px;left:24px;width:40px;height:40px;opacity:.85;}
+.dpad::before,.dpad::after{content:"";position:absolute;background:#2a1f55;border-radius:3px;box-shadow:inset 0 0 0 2px #1c1440;}
+.dpad::before{left:14px;top:0;width:12px;height:40px;}.dpad::after{left:0;top:14px;width:40px;height:12px;}
+.btns{position:absolute;bottom:26px;right:26px;display:flex;gap:10px;transform:rotate(-22deg);}
+.btns b{width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 3px 0 #a82b58;display:block;}
+</style>
+</head>
+<body>
+<div class="device">
+  <div class="brand-dot"><b></b><span>POWER</span></div>
+  <div class="bezel">
+    <div class="screen">
+      <header><div class="t pix">WHY THESE STOPS?</div><div class="s">the (over)engineering of a bar crawl</div></header>
+      <a class="back" href="index.html">◀ BACK TO THE CRAWL</a>
+      <div class="body">
+        <div class="lead">A testimony, by Fede — your humble, slightly unhinged bar guide.</div>
+
+        <p>It started innocently enough: seven friends, one Saturday, and a wish list of drinks and snacks so specific it read like a hostage note. A pilsner here, a hazy IPA there, a Negroni, a Belgian white, a Guinness, an Old Fashioned, and somebody who just wanted chips and guac. A normal person would have picked the nearest bar and called it a day. I am not a normal person.</p>
+
+        <p>So I did what any reasonable maniac would do: I summoned a <span class="pix">council of robots</span>. I commissioned full research reports from <b>Copilot, ChatGPT, Claude, and Gemini</b> — and naturally they all disagreed. One marched everyone a mile south to Morgan Junction. One confidently recommended bars that may or may not exist. One tried to make us watch Ecuador–Curaçao in three places at once. Each was certain it had cracked it. I cross-examined them like a tired detective.</p>
+
+        <p>Then came the real work: cross-referencing menus, local blogs, Reddit threads, neighborhood history, World Cup kickoff times, reservation policies, and walking distances measured down to the block. Chains-from-elsewhere were eliminated on sight (a moment of silence for the Matador). We caught Lady Jaye's secret pivot to Wagyu smash burgers. We confirmed Husky Deli would still be open. Every survivor had to be a genuine West Seattle original <i>and</i> earn its place against the wish list — no filler, no tourist traps.</p>
+
+        <p>The verdict: four originals plus an epilogue, north Admiral down to the Junction — soccer at the start, beer in the middle, the best burger in town, and s'mores by a fake campfire to close. Then I built a Game Boy app for it, because if you're going to over-plan a night out, you may as well do it in 16-bit. This is the product of genuine love for my friends and a frankly alarming number of tokens. Drink responsibly. Tip your guide.</p>
+
+        <div class="sign">— Fede 🍺⚓<br><span style="font-weight:400;font-size:14px;color:#3a4a1c">Chief Crawl Officer, West Seattle Division</span></div>
+      </div>
+      <div class="footer">I <span style="color:var(--red)">♥</span> WEST SEATTLE</div>
+    </div>
+  </div>
+  <div class="dpad"></div><div class="btns"><b></b><b></b></div>
+</div>
+</body>
+</html>
