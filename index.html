@@ -21,13 +21,14 @@ body{font-family:'VT323',monospace;background:repeating-linear-gradient(45deg,#2
 .pix{font-family:'Pixelify Sans',sans-serif;font-weight:700;letter-spacing:.5px;}
 
 .device{width:100%;max-width:480px;background:linear-gradient(160deg,var(--shell-light),var(--shell) 40%,var(--shell-dark));
-  border-radius:18px 18px 46px 18px;padding:30px 14px 78px;box-shadow:0 14px 0 var(--shell-dark),0 22px 40px var(--shadow);position:relative;}
+  border-radius:18px 18px 46px 18px;padding:30px 14px 78px;box-shadow:0 14px 0 var(--shell-dark),0 22px 40px var(--shadow);position:relative;
+  height:calc(100vh - 20px);height:calc(100dvh - 20px);display:flex;flex-direction:column;}
 .device::after{content:"GAME BOY COLOR";position:absolute;left:0;right:0;bottom:16px;text-align:center;
   font-family:'Press Start 2P';font-size:8px;letter-spacing:1px;color:#d9c7ff;text-shadow:1px 1px 0 var(--shell-dark);}
 .brand-dot{position:absolute;top:11px;left:18px;display:flex;align-items:center;gap:6px;font-family:'Press Start 2P';font-size:6px;color:#e9deff;}
 .brand-dot b{width:8px;height:8px;border-radius:50%;background:#ff4d4d;display:inline-block;box-shadow:0 0 5px 1px rgba(255,70,70,.8);}
-.bezel{background:var(--bezel);border-radius:10px 10px 28px 10px;padding:30px 14px 14px;margin-top:6px;box-shadow:inset 0 0 0 3px #2a2640;}
-.screen{background:var(--lcd);border-radius:5px;overflow:hidden;box-shadow:inset 0 0 22px rgba(0,0,0,.25);position:relative;image-rendering:pixelated;}
+.bezel{background:var(--bezel);border-radius:10px 10px 28px 10px;padding:18px 14px 14px;margin-top:6px;box-shadow:inset 0 0 0 3px #2a2640;flex:1;min-height:0;display:flex;flex-direction:column;}
+.screen{background:var(--lcd);border-radius:5px;overflow:hidden;box-shadow:inset 0 0 22px rgba(0,0,0,.25);position:relative;image-rendering:pixelated;flex:1;min-height:0;display:flex;flex-direction:column;}
 .screen::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 2px,transparent 2px 4px);border-radius:5px;}
 
 header{background:linear-gradient(180deg,var(--lcd-dark),var(--lcd-deep));color:var(--cream);padding:9px 9px 10px;border-bottom:3px solid var(--ink);}
@@ -80,7 +81,7 @@ select#player{font-family:'Pixelify Sans';font-weight:700;font-size:14px;backgro
 .tab.match.active{background:#9cc9f2;}.tab.warm.active{background:#ffd166;}
 .tab.food.active{background:#ff9b54;}.tab.final.active{background:#c9a6ff;}.tab.epi.active{background:#9be36b;}
 
-.body{padding:11px 10px 16px;}
+.body{padding:11px 10px 16px;flex:1;min-height:0;overflow-y:auto;}
 .card{background:var(--cream);border:3px solid var(--ink);border-radius:4px;box-shadow:3px 3px 0 var(--ink);overflow:hidden;}
 .card .head{display:flex;align-items:center;gap:9px;padding:9px;color:#fff;border-bottom:3px solid var(--ink);}
 .card.warm .head{background:#caa23a;}.card.match .head{background:#2f7dc4;}
@@ -386,7 +387,7 @@ function render(){
   buildTabs();
   const main=cur==="map"?mapHTML(who):cur==="history"?historyHTML(who):stopHTML(STOPS.find(s=>s.id===cur),who);
   $("body").innerHTML=sceneHTML(who)+main
-    +`<div class="footer">I <span style="color:var(--red)">♥</span> WEST SEATTLE · <a href="why.html" style="color:var(--blue);text-decoration:underline">Why these stops?</a></div>`;
+    +`<div class="footer">I <span style="color:var(--red)">♥</span> WEST SEATTLE · <a href="why.html" style="color:inherit;text-decoration:underline">Why these stops?</a></div>`;
 }
 function go(t){cur=t;render();}
 function onPlayer(){render();}
