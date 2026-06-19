@@ -89,6 +89,13 @@ select#player{font-family:'Pixelify Sans';font-weight:700;font-size:14px;backgro
 .card .head .nm{font-family:'Pixelify Sans';font-weight:700;font-size:20px;line-height:1;text-shadow:1px 1px 0 rgba(0,0,0,.4);}
 .card .head .ty{font-size:14px;opacity:.95;line-height:1;}
 .card .head .tm{margin-left:auto;font-family:'Pixelify Sans';font-weight:700;font-size:13px;background:rgba(0,0,0,.25);padding:5px 6px;border-radius:3px;white-space:nowrap;text-align:right;}
+.card .head .hx{flex:1;min-width:0;}
+.headlinks{display:flex;gap:6px;margin-left:auto;}
+.headlinks a{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#fff;background:rgba(0,0,0,.2);border-radius:4px;padding:3px 5px 2px;}
+.headlinks a img{width:22px;height:22px;object-fit:contain;display:block;image-rendering:pixelated;}
+.headlinks a b{font-family:'Pixelify Sans';font-weight:700;font-size:9px;margin-top:1px;text-shadow:1px 1px 0 rgba(0,0,0,.4);}
+.addrline{font-size:16px;color:#3a4a1c;margin-bottom:8px;}
+.addrline b{color:var(--red);}
 .inner{padding:10px;}
 .tags{margin:0 0 9px;}
 .tag{display:inline-block;font-family:'Pixelify Sans';font-weight:600;font-size:11px;padding:3px 6px;border:2px solid var(--ink);border-radius:3px;margin:0 4px 5px 0;background:#fff;}
@@ -150,7 +157,7 @@ ul.recs .k{font-family:'Pixelify Sans';font-weight:700;font-size:10px;color:var(
         <img class="logo" src="logo.png" alt="West Seattle Bar Crawl" onerror="this.style.display='none';document.getElementById('tfall').style.display='flex';">
         <div class="title" id="tfall" style="display:none"><span class="t1 pix">WEST SEATTLE</span><span class="t2 pix">★ BAR CRAWL ★</span></div>
         <div class="subbar">
-          <div class="meta"><b>SAT JUN 20</b> · <b>4 PM</b></div>
+          <div class="meta"><b>SAT JUN 20</b> · <b>4:45 PM</b></div>
           <div class="selectwrap"><label>SELECT PLAYER</label>
             <select id="player" onchange="onPlayer()"><option value="crew">▶ THE CREW</option></select>
           </div>
@@ -181,12 +188,12 @@ const ini=n=>n.slice(0,2).toUpperCase();
 /* ===== STOPS ===== */
 const STOPS=[
  {id:"admiral",cls:"warm",icon:"🍺",pin:"1",type:"WARM-UP",name:"Admiral Pub",
-  addr:"2306 California Ave SW",time:"4:00<br>(or early)",
+  addr:"2306 California Ave SW",time:"4:45–5:50",
   maps:"https://www.google.com/maps/search/?api=1&query=Admiral+Pub+2306+California+Ave+SW+Seattle",
   menu:"https://img1.wsimg.com/blobby/go/a608959e-726c-4b98-9859-cd5cd814836b/Black%20Retro%20Food%20Truck%20Menu%20A4%20Size%20(1).pdf",
   tags:[["","WS since 1950s"],["","soccer bar"]],
-  wc:"The route's only soccer moment. 12 TVs, 2 projectors, every match with sound. Roll in <b>before 4</b> to catch the earlier game.",
-  group:["Claim the big table + sort the screens","Round of cold drafts","<b>Buffalo wings</b>, <b>Idaho nachos</b> & <b>pub tacos</b> to share — keep it light, big walk next"],
+  wc:"12 TVs, 2 projectors, every match with sound. <b>Ecuador vs Curaçao starts at 5 PM — we watch the first half here, then walk.</b>",
+  group:["Arrive early to claim the big table","<b>Idaho nachos</b> & <b>pub tacos</b> to share","Keep it lighter for now"],
   fact:{owner:"jorge",title:"Admiral Theatre (1919)",url:"https://en.wikipedia.org/wiki/Admiral_Theatre_(Seattle)",
     short:"The grand 1919 movie palace you pass leaving here.",
     long:"Opened 1919 as the Portola Theatre, designed by legendary cinema architect B. Marcus Priteca. The community fought to save it in the late '80s — it still runs today, at 2343 California, right on your way south."},
@@ -200,12 +207,13 @@ const STOPS=[
    victor:[["DRINK","A crisp lager."],["EAT","<b>Popcorn chicken</b>."],["MOVE","Hydrate before the walk."]]
   }},
 
- {id:"elliott",cls:"match",icon:"🌿",pin:"2",type:"BREWERY · BEER + FOOD",name:"Elliott Bay Brewing",
-  addr:"4720 California Ave SW",time:"5:10–6:15",
+ {id:"elliott",cls:"match",icon:"🌿",pin:"2",type:"BEER + MORE FOOD",name:"Elliott Bay Brewing",
+  addr:"4720 California Ave SW",time:"6:20–7:20",
   maps:"https://www.google.com/maps/search/?api=1&query=Elliott+Bay+Brewing+4720+California+Ave+SW+Seattle",
   menu:"https://order.toasttab.com/order-and-pay/elliottbaybrewing-westseattle/welcome",
   tags:[["","1st organic brewery, 1997"],["","full kitchen"]],
-  group:["A couple <b>beer flights</b> to map the styles","<b>House wings</b> + <b>chicken tenders</b>","<b>Brewhouse quesadilla</b>, <b>chips + fresh guac</b>, <b>pretzel + beer cheese</b>"],
+  wc:"You arrive ~6:20 and the match runs to ~6:50 — catch the <b>end of the 2nd half</b> on the TVs here.",
+  group:["<b>Beer flights</b> to catch the end of the game","Chicken fans: <b>house wings + chicken tenders</b>","<b>Pretzel</b> and <b>fresh guac</b> for the fans"],
   fact:{owner:"victor",title:"Husky Deli (since 1932)",url:"https://en.wikipedia.org/wiki/Husky_Deli",
     short:"The 1932 ice-cream institution right across the street.",
     long:"One of the Junction's oldest, most-loved spots — making ice cream on California Ave since 1932, at 4721 right across from here, open till 7. Grab a scoop on the way in."},
@@ -219,12 +227,12 @@ const STOPS=[
    victor:[["DRINK","<b>Luna Weizen</b> — closest to your Belgian white."],["EAT","<b>Crispy chicken tenders</b>."],["FACT","Husky Deli across the street is yours."]]
   }},
 
- {id:"ladyjaye",cls:"food",icon:"🍔",pin:"3",type:"FOOD + BURGERS",name:"Lady Jaye",
-  addr:"4523 California Ave SW",time:"6:30–7:15",
+ {id:"ladyjaye",cls:"food",icon:"🍔",pin:"3",type:"BURGERS",name:"Lady Jaye",
+  addr:"4523 California Ave SW",time:"7:30–8:15",
   maps:"https://www.google.com/maps/search/?api=1&query=Lady+Jaye+4523+California+Ave+SW+Seattle",
   menu:"https://ladyjaye.com/order-online/",
-  tags:[["ok","✓ RESERVATION — 6:30 PM, party of 7"],["","smokehouse + butcher"]],
-  group:["<b>✓ We have a reservation: 6:30 PM, table for 7</b> — be on time.","The legendary <b>Wagyu smash burgers</b> — the whole point of this stop","<b>Smoked wings</b> + the <b>pimento fried-chicken sandwich</b>","Cocktail crew opens the <b>smoked Old Fashioned</b> tab"],
+  tags:[["ok","✓ RESERVATION — 7:30 PM, table for 7"],["","smokehouse + butcher"]],
+  group:["<b>Reservation: 7:30 PM, table for 7</b>","Legendary <b>Wagyu smash burgers</b>","Cocktail crew opens the <b>smoked Old Fashioned</b> tab"],
   fact:{owner:"adan",title:"Easy Street Records (1988)",url:"https://en.wikipedia.org/wiki/Easy_Street_Records",
     short:"The grunge cathedral half a block away at California & Alaska.",
     long:"Easy Street Records at California & Alaska. Pearl Jam played a 200-person SURPRISE show inside on Apr 29, 2005 (a best-selling live EP). Outside walls carry murals of Chris Cornell & Mother Love Bone's Andy Wood. Holy ground for the Seattle sound."},
@@ -239,11 +247,11 @@ const STOPS=[
   }},
 
  {id:"campwest",cls:"final",icon:"🏕️",pin:"4",type:"COCKTAIL FINALE",name:"Camp West",
-  addr:"4539 California Ave SW",time:"~7:30–close",
+  addr:"4539 California Ave SW",time:"~8:25–close",
   maps:"https://www.google.com/maps/search/?api=1&query=Camp+West+4539+California+Ave+SW+Seattle",
   menu:"https://thecampwest.com/dine-in-menu/",
-  tags:[["res","WALK-IN ~7:30"],["age","21+"],["","cabin bar"]],
-  group:["You'll be full from Lady Jaye — make this <b>cocktails + dessert</b>","Roast <b>tableside s'mores</b> (their famous move — pick your chocolate)","Cocktail classics + the <b>70+ whiskey wall</b>; charcuterie only if still hungry"],
+  tags:[["res","WALK-IN ~8:25"],["age","21+"],["","cabin bar"]],
+  group:["<b>Cocktails + dessert</b>, post-dinner","Roast <b>tableside s'mores</b> (their signature)","Cocktail classics + the <b>70+ whiskey wall</b>"],
   fact:{owner:"cris",title:"The 11 Junction Murals",url:"https://westseattleblog.com/west-seattle-101-the-murals/",
     short:"The hand-painted murals all over these blocks.",
     long:"11 historical murals (led by Earl Cruzen, painted 1989–93) cover Junction buildings — the old streetcar crossing and neighborhood scenes. The project won national Neighborhood of the Year in 1992. Look up while you drink."},
@@ -262,7 +270,7 @@ const STOPS=[
   maps:"https://www.google.com/maps/search/?api=1&query=The+Beer+Junction+4511+California+Ave+SW+Seattle",
   menu:"https://www.thebeerjunction.com/tap-list",
   tags:[["","35+ taps · 1,000+ bottles"],["age","21+ · walk-in"]],
-  group:["<b>Buy beer to go</b> — grab bottles/cans to take home or split with the crew","One last pour off the 35+ taps + a snack (pretzel, Olli pack, corn nuts)","Toast the crawl — then scatter into the night"],
+  group:["<b>Buy beer to go</b> — grab bottles/cans to take home (share with a loved one?)","One last pour off the 35+ taps?","Toast the crawl"],
   fact:{owner:"manfred",title:"Why it's 'The Junction'",url:"https://en.wikipedia.org/wiki/West_Seattle,_Seattle",
     short:"Where two streetcar lines once crossed — the heart of West Seattle.",
     long:"In 1907 two streetcar lines crossed at California & Alaska — the Fauntleroy line met the Admiral line. A swampy outpost became downtown West Seattle in a month. Cars ran till 1940; California Ave SW is still the 'spine of West Seattle.'"},
@@ -350,9 +358,12 @@ function stopHTML(s,who){
   else{const r=s.recs[who]||[];mid=`<div class="lab">★ ${P(who).name.toUpperCase()}'S 3 MOVES</div><ul class="bul recs">${r.map((x,i)=>`<li><span class="num">${i+1}</span><span class="k">${x[0]}</span>${x[1]}</li>`).join("")}</ul>`;}
   const wc=s.wc?`<div class="wcline"><span class="h">WORLD CUP</span>${s.wc}</div>`:"";
   return `<div class="card ${s.cls}">
-    <div class="head"><span class="ic"><img src="icons/${s.id}.png" alt="" style="width:28px;height:28px;object-fit:contain;display:block;image-rendering:pixelated" onerror="this.outerHTML='${s.icon}'"></span><div><div class="nm">${s.name}</div><div class="ty">${s.type}</div></div><div class="tm">${s.time}</div></div>
-    <div class="inner"><div style="font-size:15px;color:#3a4a1c;margin-bottom:7px">${s.addr}</div>
-      <div class="links"><a href="${s.maps}" target="_blank">MAP</a><a href="${s.menu}" target="_blank">MENU</a></div>
+    <div class="head">
+      <span class="ic"><img src="icons/${s.id}.png" alt="" style="width:28px;height:28px;object-fit:contain;display:block;image-rendering:pixelated" onerror="this.outerHTML='${s.icon}'"></span>
+      <div class="hx"><div class="nm">${s.name}</div><div class="ty">${s.type}</div></div>
+      <div class="headlinks"><a href="${s.maps}" target="_blank"><img src="icons/map.png" alt="" onerror="this.style.display='none'"><b>MAP</b></a><a href="${s.menu}" target="_blank"><img src="icons/menu.png" alt="" onerror="this.style.display='none'"><b>MENU</b></a></div>
+    </div>
+    <div class="inner"><div class="addrline">${s.addr} · <b>${s.time.replace('<br>',' ')}</b></div>
       <div class="tags">${tags}</div>${mid}
       ${wc}</div></div>`;
 }
