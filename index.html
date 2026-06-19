@@ -26,8 +26,8 @@ body{font-family:'VT323',monospace;background:repeating-linear-gradient(45deg,#2
 .pix{font-family:'Pixelify Sans',sans-serif;font-weight:700;letter-spacing:.5px;}
 
 .device{width:100%;max-width:480px;background:linear-gradient(160deg,var(--shell-light),var(--shell) 40%,var(--shell-dark));
-  border-radius:18px 18px 46px 18px;padding:30px 14px 78px;box-shadow:0 14px 0 var(--shell-dark),0 22px 40px var(--shadow);position:relative;}
-.device::after{content:"GAME BOY COLOR";position:absolute;left:0;right:0;bottom:16px;text-align:center;
+  border-radius:18px 18px 46px 18px;padding:30px 14px 58px;box-shadow:0 14px 0 var(--shell-dark),0 22px 40px var(--shadow);position:relative;}
+.device::after{content:"GAME BOY COLOR";position:absolute;left:0;right:0;bottom:5px;text-align:center;
   font-family:'Press Start 2P';font-size:8px;letter-spacing:1px;color:#d9c7ff;text-shadow:1px 1px 0 var(--shell-dark);}
 .brand-dot{position:absolute;top:11px;left:18px;display:flex;align-items:center;gap:6px;font-family:'Press Start 2P';font-size:6px;color:#e9deff;}
 .brand-dot b{width:8px;height:8px;border-radius:50%;background:#ff4d4d;display:inline-block;box-shadow:0 0 5px 1px rgba(255,70,70,.8);}
@@ -56,7 +56,7 @@ select#player{font-family:'Pixelify Sans';font-weight:700;font-size:14px;backgro
 .pstrip .sl{font-size:16px;color:#3a4a1c;line-height:1.05;font-style:italic;}
 
 /* walking scene */
-.scene{position:relative;height:98px;border:3px solid var(--ink);border-radius:4px;overflow:hidden;margin-bottom:11px;box-shadow:3px 3px 0 var(--ink);
+.scene{position:relative;height:112px;border:3px solid var(--ink);border-radius:4px;overflow:hidden;margin-bottom:11px;box-shadow:3px 3px 0 var(--ink);
   background:linear-gradient(180deg,#bcd0e8 0%,#d4e3b4 54%,#9bb066 54%,#9bb066 100%);}
 .scene .ico{position:absolute;opacity:.85;}
 .scene .road{position:absolute;left:0;right:0;bottom:0;height:22px;border-top:2px solid var(--ink);
@@ -65,6 +65,8 @@ select#player{font-family:'Pixelify Sans';font-weight:700;font-size:14px;backgro
 .scene .flag{position:absolute;right:9px;bottom:20px;font-size:24px;z-index:3;}
 .scene .cast{position:absolute;bottom:18px;left:12px;right:44px;display:flex;gap:5px;align-items:flex-end;z-index:2;}
 .scene .solo{justify-content:center;}
+.scene.withbld .cast{right:42%;}
+.scene .bld{position:absolute;right:6px;bottom:18px;height:82px;width:auto;z-index:1;image-rendering:pixelated;}
 .scene .label{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-family:'Pixelify Sans';font-weight:700;font-size:12px;color:var(--cream);text-shadow:1px 1px 0 var(--ink);z-index:3;}
 .av{background:var(--c,#888);border:2px solid var(--ink);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Pixelify Sans';font-weight:700;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.4);overflow:hidden;position:relative;image-rendering:pixelated;}
 .av .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
@@ -147,13 +149,13 @@ ul.recs .k{font-family:'Pixelify Sans';font-weight:700;font-size:10px;color:var(
 .legend span{font-size:14px;display:flex;align-items:center;gap:3px;color:#3a4a1c;}
 .legend i{width:11px;height:11px;border:1px solid var(--ink);border-radius:2px;display:inline-block;}
 .footer{font-family:'Pixelify Sans';font-weight:600;font-size:11px;color:var(--lcd-deep);text-align:center;line-height:1.7;margin-top:12px;padding-top:8px;border-top:2px dashed var(--lcd-dark);}
-.wa{position:fixed;right:14px;bottom:14px;width:60px;height:60px;z-index:200;}
+.wa{position:fixed;right:12px;bottom:74px;width:54px;height:54px;z-index:200;}
 .wa img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(2px 3px 2px rgba(0,0,0,.55));}
 .wa:active{transform:scale(.94);}
-.dpad{position:absolute;bottom:20px;left:24px;width:40px;height:40px;opacity:.85;}
+.dpad{position:absolute;bottom:14px;left:24px;width:38px;height:38px;opacity:.85;}
 .dpad::before,.dpad::after{content:"";position:absolute;background:#2a1f55;border-radius:3px;box-shadow:inset 0 0 0 2px #1c1440;}
-.dpad::before{left:14px;top:0;width:12px;height:40px;}.dpad::after{left:0;top:14px;width:40px;height:12px;}
-.btns{position:absolute;bottom:26px;right:26px;display:flex;gap:10px;transform:rotate(-22deg);}
+.dpad::before{left:13px;top:0;width:12px;height:38px;}.dpad::after{left:0;top:13px;width:38px;height:12px;}
+.btns{position:absolute;bottom:16px;right:26px;display:flex;gap:10px;transform:rotate(-22deg);}
 .btns b{width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 3px 0 #a82b58;display:block;}
 </style>
 </head>
@@ -320,7 +322,9 @@ function sceneHTML(who){
     const p=P(who);
     cast=`<div class="cast solo">${avHTML(p,"av l bob")}</div><div class="label">▶ ${p.name.toUpperCase()} IS ON THE CRAWL</div>`;
   }
-  return `<div class="scene">${icos}${cast}<div class="road"></div></div>`;
+  const st=STOPS.find(s=>s.id===cur);
+  const bld=st?`<img class="bld" src="icons/bld_${st.id}.png" alt="" onerror="this.remove()">`:"";
+  return `<div class="scene${st?' withbld':''}">${icos}${bld}${cast}<div class="road"></div></div>`;
 }
 
 function buildSelect(){const s=$("player");PLAYERS.forEach(p=>{const o=document.createElement("option");o.value=p.id;o.textContent=p.name.toUpperCase();s.appendChild(o);});}
