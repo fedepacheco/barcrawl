@@ -1,0 +1,37 @@
+WEST SEATTLE BAR CRAWL — HOW TO PUT THIS ONLINE
+================================================
+This folder is your whole website. Keep the structure exactly as-is:
+   index.html        <- the app (open this / it's the homepage)
+   logo.png
+   avatars/   (7 player sprites)
+   icons/     (9 icons)
+
+------------------------------------------------
+OPTION A — MICROSOFT / AZURE (free hosting + your own domain)
+------------------------------------------------
+1. Make a free GitHub account (github.com) and a free Azure account
+   (azure.microsoft.com/free).
+2. On GitHub: create a new repository -> "Add file" -> "Upload files"
+   -> drag in index.html, logo.png, and the avatars and icons folders
+   -> Commit.
+3. In the Azure Portal: "Create a resource" -> search "Static Web App"
+   -> Create. Sign in to GitHub, pick your repo and branch.
+   - Build presets: choose "Custom".
+   - App location: /     (leave Api location blank, Output blank)
+   -> Review + Create. In ~2 min you get a free https URL ending in
+     .azurestaticapps.net  (already has SSL).
+4. Buy a domain: Azure Portal -> "App Service Domains" (~$12-20/yr),
+   OR any registrar (Cloudflare, Namecheap).
+5. In your Static Web App -> "Custom domains" -> Add -> enter your
+   domain -> add the DNS record it shows you. Done — free SSL auto.
+
+------------------------------------------------
+OPTION B — EASIEST (drag & drop, also free) — Cloudflare Pages / Netlify
+------------------------------------------------
+1. Go to pages.cloudflare.com (or app.netlify.com) and sign up free.
+2. Choose "Upload assets" / drag this whole folder in.
+3. You instantly get a live https link. Add a custom domain in their
+   dashboard if you want (they sell domains too).
+
+TIP: To test locally first, just double-click index.html — it opens
+in your browser exactly like the live site will look.

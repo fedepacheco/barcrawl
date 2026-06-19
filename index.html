@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>West Seattle Bar Crawl — GBC Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --shell:#5a3fa0;--shell-dark:#3b2870;--shell-light:#7a5cc8;--bezel:#15131f;
+  --lcd:#c8d99a;--lcd-dark:#9bb066;--lcd-deep:#5c7038;
+  --ink:#21300f;--paper:#e7f0c8;--cream:#f4f7e3;
+  --gold:#f8b800;--red:#e83000;--accent:#e8407c;--blue:#2a7de1;--shadow:rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'VT323',monospace;background:repeating-linear-gradient(45deg,#241a3f 0 14px,#221838 14px 28px);
+  color:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:10px;}
+.pix{font-family:'Pixelify Sans',sans-serif;font-weight:700;letter-spacing:.5px;}
+
+.device{width:100%;max-width:480px;background:linear-gradient(160deg,var(--shell-light),var(--shell) 40%,var(--shell-dark));
+  border-radius:18px 18px 46px 18px;padding:30px 14px 78px;box-shadow:0 14px 0 var(--shell-dark),0 22px 40px var(--shadow);position:relative;}
+.device::after{content:"GAME BOY COLOR";position:absolute;left:0;right:0;bottom:16px;text-align:center;
+  font-family:'Press Start 2P';font-size:8px;letter-spacing:1px;color:#d9c7ff;text-shadow:1px 1px 0 var(--shell-dark);}
+.brand-dot{position:absolute;top:11px;left:18px;display:flex;align-items:center;gap:6px;font-family:'Press Start 2P';font-size:6px;color:#e9deff;}
+.brand-dot b{width:8px;height:8px;border-radius:50%;background:#ff4d4d;display:inline-block;box-shadow:0 0 5px 1px rgba(255,70,70,.8);}
+.bezel{background:var(--bezel);border-radius:10px 10px 28px 10px;padding:30px 14px 14px;margin-top:6px;box-shadow:inset 0 0 0 3px #2a2640;}
+.screen{background:var(--lcd);border-radius:5px;overflow:hidden;box-shadow:inset 0 0 22px rgba(0,0,0,.25);position:relative;image-rendering:pixelated;}
+.screen::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 2px,transparent 2px 4px);border-radius:5px;}
+
+header{background:linear-gradient(180deg,var(--lcd-dark),var(--lcd-deep));color:var(--cream);padding:9px 9px 10px;border-bottom:3px solid var(--ink);}
+.logo{display:block;margin:2px auto 0;max-height:118px;max-width:96%;height:auto;width:auto;}
+.title{font-size:23px;line-height:1;display:flex;flex-direction:column;gap:1px;align-items:center;}
+.title .t1{text-shadow:2px 2px 0 var(--ink);}
+.title .t2{color:var(--gold);font-size:21px;text-shadow:2px 2px 0 var(--ink);}
+.subbar{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-top:8px;}
+.meta{font-size:17px;color:var(--paper);line-height:1.1;}.meta b{color:var(--gold);}
+.selectwrap label{display:block;font-family:'Press Start 2P';font-size:5px;color:var(--paper);margin-bottom:3px;text-align:right;}
+select#player{font-family:'Pixelify Sans';font-weight:700;font-size:14px;background:var(--cream);color:var(--ink);
+  border:3px solid var(--ink);border-radius:3px;padding:6px 6px;max-width:150px;box-shadow:2px 2px 0 var(--ink);cursor:pointer;}
+
+.pstrip{display:none;align-items:center;gap:9px;padding:8px 9px;background:var(--cream);border-bottom:3px solid var(--ink);}
+.pstrip.show{display:flex;}
+.avatar{width:44px;height:44px;flex:0 0 44px;background:var(--c,#888);border:3px solid var(--ink);border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-family:'Pixelify Sans';font-weight:700;font-size:15px;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.5);position:relative;overflow:hidden;image-rendering:pixelated;}
+.avatar .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.pstrip .nm{font-size:21px;line-height:1;}
+.pstrip .sl{font-size:16px;color:#3a4a1c;line-height:1.05;font-style:italic;}
+
+/* walking scene */
+.scene{position:relative;height:98px;border:3px solid var(--ink);border-radius:4px;overflow:hidden;margin-bottom:11px;box-shadow:3px 3px 0 var(--ink);
+  background:linear-gradient(180deg,#bcd0e8 0%,#d4e3b4 54%,#9bb066 54%,#9bb066 100%);}
+.scene .ico{position:absolute;opacity:.85;}
+.scene .road{position:absolute;left:0;right:0;bottom:0;height:22px;border-top:2px solid var(--ink);
+  background:repeating-linear-gradient(90deg,#74854c 0 12px,#88995a 12px 24px);animation:roll .5s linear infinite;}
+@keyframes roll{to{background-position:-24px 0;}}
+.scene .flag{position:absolute;right:9px;bottom:20px;font-size:24px;z-index:3;}
+.scene .cast{position:absolute;bottom:18px;left:12px;right:44px;display:flex;gap:5px;align-items:flex-end;z-index:2;}
+.scene .solo{justify-content:center;}
+.scene .label{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-family:'Pixelify Sans';font-weight:700;font-size:12px;color:var(--cream);text-shadow:1px 1px 0 var(--ink);z-index:3;}
+.av{background:var(--c,#888);border:2px solid var(--ink);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Pixelify Sans';font-weight:700;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.4);overflow:hidden;position:relative;image-rendering:pixelated;}
+.av .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.av.s{width:26px;height:26px;font-size:11px;} .av.l{width:48px;height:48px;font-size:17px;}
+/* when a real sprite loads: show it ALONE — no box, no border, no initials */
+.avatar img,.av img{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;}
+.avatar.imgok,.av.imgok{background:transparent!important;border:none;border-radius:0;overflow:visible;}
+.avatar.imgok img,.av.imgok img{display:block;}
+.avatar.imgok .ph,.av.imgok .ph{display:none;}
+.bob{animation:bob .5s steps(2,end) infinite;}
+@keyframes bob{50%{transform:translateY(-4px);}}
+
+.tabbar{display:flex;overflow-x:auto;gap:5px;padding:8px;background:var(--lcd-deep);scrollbar-width:none;border-bottom:3px solid var(--ink);}
+.tabbar::-webkit-scrollbar{display:none;}
+.tab{flex:0 0 auto;font-family:'Pixelify Sans';font-weight:600;font-size:13px;color:var(--ink);background:var(--cream);
+  border:2px solid var(--ink);border-radius:3px;padding:6px 9px;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;box-shadow:2px 2px 0 var(--ink);}
+.tab .b{font-family:'Press Start 2P';font-size:8px;background:var(--ink);color:#fff;border-radius:2px;padding:2px 3px;min-width:14px;text-align:center;}
+.tab.active{background:var(--gold);box-shadow:2px 2px 0 var(--shell-dark);}
+.tab.match.active{background:#9cc9f2;}.tab.warm.active{background:#ffd166;}
+.tab.food.active{background:#ff9b54;}.tab.final.active{background:#c9a6ff;}.tab.epi.active{background:#9be36b;}
+
+.body{padding:11px 10px 16px;}
+.card{background:var(--cream);border:3px solid var(--ink);border-radius:4px;box-shadow:3px 3px 0 var(--ink);overflow:hidden;}
+.card .head{display:flex;align-items:center;gap:9px;padding:9px;color:#fff;border-bottom:3px solid var(--ink);}
+.card.warm .head{background:#caa23a;}.card.match .head{background:#2f7dc4;}
+.card.food .head{background:#d2682f;}.card.final .head{background:#7d5bbd;}.card.epi .head{background:#4f9a3a;}
+.card .head .ic{font-size:24px;}
+.card .head .nm{font-family:'Pixelify Sans';font-weight:700;font-size:20px;line-height:1;text-shadow:1px 1px 0 rgba(0,0,0,.4);}
+.card .head .ty{font-size:14px;opacity:.95;line-height:1;}
+.card .head .tm{margin-left:auto;font-family:'Pixelify Sans';font-weight:700;font-size:13px;background:rgba(0,0,0,.25);padding:5px 6px;border-radius:3px;white-space:nowrap;text-align:right;}
+.inner{padding:10px;}
+.tags{margin:0 0 9px;}
+.tag{display:inline-block;font-family:'Pixelify Sans';font-weight:600;font-size:11px;padding:3px 6px;border:2px solid var(--ink);border-radius:3px;margin:0 4px 5px 0;background:#fff;}
+.tag.ok{background:#9be36b;}.tag.res{background:#ffd166;}.tag.age{background:#ffc4e0;}
+.lab{font-family:'Pixelify Sans';font-weight:700;font-size:13px;color:var(--accent);margin:10px 0 5px;}
+ul.bul{list-style:none;margin:0;padding:0;}
+ul.bul li{font-size:17px;line-height:1.2;color:#33421a;padding:4px 0 4px 18px;position:relative;border-bottom:1px dotted var(--lcd-dark);}
+ul.bul li:last-child{border-bottom:none;}
+ul.bul li::before{content:"▸";position:absolute;left:0;color:var(--red);}
+ul.bul li b{color:var(--red);}
+ul.recs li{padding-left:24px;}
+ul.recs .num{position:absolute;left:0;top:5px;font-family:'Press Start 2P';font-size:8px;color:#fff;background:var(--ink);width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;}
+ul.recs .k{font-family:'Pixelify Sans';font-weight:700;font-size:10px;color:var(--accent);margin-right:5px;}
+.links{display:flex;gap:7px;margin-top:11px;}
+.links a{flex:1;text-align:center;text-decoration:none;font-family:'Pixelify Sans';font-weight:700;font-size:13px;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:3px;padding:7px 4px;box-shadow:2px 2px 0 var(--ink);}
+.links a:active{transform:translate(2px,2px);box-shadow:none;}
+.factbox{margin-top:11px;background:#fff8d8;border:2px dashed var(--ink);border-radius:4px;padding:8px;}
+.factbox .own{font-family:'Pixelify Sans';font-weight:700;font-size:12px;margin-bottom:4px;}
+.factbox .ttl{font-family:'Pixelify Sans';font-weight:700;font-size:17px;color:var(--ink);line-height:1;margin-bottom:4px;}
+.factbox p{margin:0;font-size:16px;line-height:1.2;color:#3a4a1c;}
+.factbox.lore{background:#eaf3fb;}
+.factbox .learn{display:inline-block;margin-top:6px;font-family:'Pixelify Sans';font-weight:700;font-size:13px;color:var(--blue);text-decoration:underline;}
+.pinfact{background:#fff3c4;border:3px solid var(--ink);border-radius:4px;box-shadow:3px 3px 0 var(--ink);padding:9px;margin-bottom:12px;}
+.pinlab{font-family:'Pixelify Sans';font-weight:700;font-size:12px;color:var(--accent);margin-bottom:4px;}
+.wcline{margin-top:11px;background:#eafbe0;border:2px solid var(--ink);border-radius:3px;padding:8px;font-size:16px;line-height:1.2;color:#274a17;}
+.wcline .h{font-family:'Pixelify Sans';font-weight:700;color:#2f7d1f;margin-right:5px;}
+
+.route{background:var(--cream);border:3px solid var(--ink);border-radius:4px;box-shadow:3px 3px 0 var(--ink);padding:9px;}
+.rtitle{font-family:'Pixelify Sans';font-weight:700;font-size:16px;margin:0 0 9px;color:var(--ink);}
+.ovw{display:flex;gap:6px;margin:0 0 10px;}
+.ovw div{flex:1;background:#fff;border:2px solid var(--ink);border-radius:3px;padding:6px 4px;text-align:center;box-shadow:2px 2px 0 var(--ink);}
+.ovw b{font-family:'Pixelify Sans';font-weight:700;font-size:15px;color:var(--red);display:block;line-height:1;}
+.ovw span{font-size:13px;color:#3a4a1c;}
+.rrow{display:flex;align-items:center;gap:9px;cursor:pointer;padding:3px 0;}
+.rrow .pin{width:32px;height:32px;flex:0 0 32px;border:3px solid var(--ink);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.rrow.warm .pin{background:#ffd166;}.rrow.match .pin{background:#9cc9f2;}
+.rrow.food .pin{background:#ff9b54;}.rrow.final .pin{background:#c9a6ff;}.rrow.epi .pin{background:#9be36b;}
+.rrow .nm{font-family:'Pixelify Sans';font-weight:700;font-size:15px;line-height:1;}
+.rrow .tm{font-size:14px;color:var(--lcd-deep);line-height:1.05;}
+.rconn{margin-left:15px;padding:3px 0 3px 16px;border-left:3px dotted var(--ink);font-size:14px;color:#5c7038;line-height:1.15;}
+.rconn .w{margin-left:-26px;margin-right:8px;}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+.legend span{font-size:14px;display:flex;align-items:center;gap:3px;color:#3a4a1c;}
+.legend i{width:11px;height:11px;border:1px solid var(--ink);border-radius:2px;display:inline-block;}
+.footer{font-family:'Pixelify Sans';font-weight:600;font-size:11px;color:var(--lcd-deep);text-align:center;line-height:1.7;margin-top:12px;padding-top:8px;border-top:2px dashed var(--lcd-dark);}
+.dpad{position:absolute;bottom:20px;left:24px;width:40px;height:40px;opacity:.85;}
+.dpad::before,.dpad::after{content:"";position:absolute;background:#2a1f55;border-radius:3px;box-shadow:inset 0 0 0 2px #1c1440;}
+.dpad::before{left:14px;top:0;width:12px;height:40px;}.dpad::after{left:0;top:14px;width:40px;height:12px;}
+.btns{position:absolute;bottom:26px;right:26px;display:flex;gap:10px;transform:rotate(-22deg);}
+.btns b{width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 3px 0 #a82b58;display:block;}
+</style>
+</head>
+<body>
+<div class="device">
+  <div class="brand-dot"><b></b><span>POWER</span></div>
+  <div class="bezel">
+    <div class="screen">
+      <header>
+        <img class="logo" src="logo.png" alt="West Seattle Bar Crawl" onerror="this.style.display='none';document.getElementById('tfall').style.display='flex';">
+        <div class="title" id="tfall" style="display:none"><span class="t1 pix">WEST SEATTLE</span><span class="t2 pix">★ BAR CRAWL ★</span></div>
+        <div class="subbar">
+          <div class="meta"><b>SAT JUN 20</b> · <b>4 PM</b></div>
+          <div class="selectwrap"><label>SELECT PLAYER</label>
+            <select id="player" onchange="onPlayer()"><option value="crew">▶ THE CREW</option></select>
+          </div>
+        </div>
+      </header>
+      <div class="pstrip" id="pstrip"></div>
+      <div class="tabbar" id="tabbar"></div>
+      <div class="body" id="body"></div>
+    </div>
+  </div>
+  <div class="dpad"></div><div class="btns"><b></b><b></b></div>
+</div>
+
+<script>
+/* ===== PLAYERS (alphabetical) ===== */
+const PLAYERS=[
+ {id:"adan",name:"Adán",color:"#6844fc",slogan:"Peat, stout & a proper charcuterie board."},
+ {id:"cris",name:"Cris",color:"#f87800",slogan:"Amber ale and melted-cheese devotion."},
+ {id:"fabri",name:"Fabri",color:"#00a800",slogan:"Old-Fashioned soul, hoppy heart."},
+ {id:"fede",name:"Fede",color:"#f8b800",role:"GUIDE",slogan:"El Capitán — cold pilsner, crispy chicken, leads the march."},
+ {id:"jorge",name:"Jorge",color:"#e83000",slogan:"Hazy IPAs and Buffalo-sauce fingers."},
+ {id:"manfred",name:"Manfred",color:"#00b8b8",slogan:"Negroni in hand, pub mix in reach."},
+ {id:"victor",name:"Victor",color:"#0078f8",slogan:"Belgian white and golden fried."}
+];
+const P=id=>PLAYERS.find(x=>x.id===id);
+const ini=n=>n.slice(0,2).toUpperCase();
+
+/* ===== STOPS ===== */
+const STOPS=[
+ {id:"admiral",cls:"warm",icon:"🍺",pin:"1",type:"WARM-UP",name:"Admiral Pub",
+  addr:"2306 California Ave SW",time:"4:00<br>(or early)",
+  maps:"https://www.google.com/maps/search/?api=1&query=Admiral+Pub+2306+California+Ave+SW+Seattle",
+  menu:"https://img1.wsimg.com/blobby/go/a608959e-726c-4b98-9859-cd5cd814836b/Black%20Retro%20Food%20Truck%20Menu%20A4%20Size%20(1).pdf",
+  tags:[["","WS since 1950s"],["","soccer bar"]],
+  wc:"The route's only soccer moment. 12 TVs, 2 projectors, every match with sound. Roll in <b>before 4</b> to catch the earlier game.",
+  group:["Claim the big table + sort the screens","Round of cold drafts","<b>Buffalo wings</b>, <b>Idaho nachos</b> & <b>pub tacos</b> to share — keep it light, big walk next"],
+  fact:{owner:"jorge",title:"Admiral Theatre (1919)",url:"https://en.wikipedia.org/wiki/Admiral_Theatre_(Seattle)",
+    short:"The grand 1919 movie palace you pass leaving here.",
+    long:"Opened 1919 as the Portola Theatre, designed by legendary cinema architect B. Marcus Priteca. The community fought to save it in the late '80s — it still runs today, at 2343 California, right on your way south."},
+  recs:{
+   adan:[["DRINK","<b>Guinness on draft</b>, poured slow."],["EAT","Graze the <b>Idaho nachos</b> — save room for charcuterie."],["NOTE","Warm up the storyteller."]],
+   cris:[["DRINK","An amber/lager pour."],["EAT","<b>Pub tacos</b> (steak bits)."],["LOOK","Murals start as you head south — they're yours."]],
+   fabri:[["DRINK","<b>Draft IPA</b>, easy opener."],["EAT","<b>Popcorn chicken</b>."],["NOTE","Pace it — Old Fashioneds come later."]],
+   fede:[["DRINK","Cold <b>pilsner/lager</b> to start."],["EAT","<b>Buffalo wings</b>."],["GUIDE","Captain's job: table, screen, tab."]],
+   jorge:[["DRINK","<b>Draft IPA</b> off the taps."],["EAT","<b>Buffalo wings</b> — your signature."],["VIBE","Your room — soak the soccer energy."]],
+   manfred:[["DRINK","A well <b>Negroni</b> to open."],["EAT","<b>Idaho nachos</b> with the table."],["NOTE","Real Negroni waits at Camp West."]],
+   victor:[["DRINK","A crisp lager."],["EAT","<b>Popcorn chicken</b>."],["MOVE","Hydrate before the walk."]]
+  }},
+
+ {id:"elliott",cls:"match",icon:"🌿",pin:"2",type:"BREWERY · BEER + FOOD",name:"Elliott Bay Brewing",
+  addr:"4720 California Ave SW",time:"5:10–6:15",
+  maps:"https://www.google.com/maps/search/?api=1&query=Elliott+Bay+Brewing+4720+California+Ave+SW+Seattle",
+  menu:"https://order.toasttab.com/order-and-pay/elliottbaybrewing-westseattle/welcome",
+  tags:[["","1st organic brewery, 1997"],["","full kitchen"]],
+  group:["A couple <b>beer flights</b> to map the styles","<b>House wings</b> + <b>chicken tenders</b>","<b>Brewhouse quesadilla</b>, <b>chips + fresh guac</b>, <b>pretzel + beer cheese</b>"],
+  fact:{owner:"victor",title:"Husky Deli (since 1932)",url:"https://en.wikipedia.org/wiki/Husky_Deli",
+    short:"The 1932 ice-cream institution right across the street.",
+    long:"One of the Junction's oldest, most-loved spots — making ice cream on California Ave since 1932, at 4721 right across from here, open till 7. Grab a scoop on the way in."},
+  recs:{
+   adan:[["DRINK","A dark/stout seasonal on tap."],["EAT","<b>Hummus + olive plate</b>."],["NOTE","Start the savory run."]],
+   cris:[["DRINK","<b>Demolition Ale</b> — malty amber, your lane."],["EAT","<b>Brewhouse quesadilla</b>, your craving."],["LOOK","Murals all around this block."]],
+   fabri:[["DRINK","A fresh <b>IPA</b>."],["EAT","<b>Chips + fresh guacamole</b> — sorted."],["TIP","Old Fashioned next, at Lady Jaye."]],
+   fede:[["DRINK","<b>PK Pilsner</b> — crisp, organic, your style."],["EAT","<b>Crispy chicken tenders</b>."],["GUIDE","Order 2 flights for the table."]],
+   jorge:[["DRINK","<b>Equalizer IPA</b>."],["EAT","<b>Chipotle chicken nachos</b>."],["NOTE","Best beer+food anchor of the day."]],
+   manfred:[["DRINK","A cold draft."],["EAT","<b>Soft pretzel + beer cheese</b>."],["NOTE","Pace for the Negroni."]],
+   victor:[["DRINK","<b>Luna Weizen</b> — closest to your Belgian white."],["EAT","<b>Crispy chicken tenders</b>."],["FACT","Husky Deli across the street is yours."]]
+  }},
+
+ {id:"ladyjaye",cls:"food",icon:"🍔",pin:"3",type:"FOOD + BURGERS",name:"Lady Jaye",
+  addr:"4523 California Ave SW",time:"6:30–7:15",
+  maps:"https://www.google.com/maps/search/?api=1&query=Lady+Jaye+4523+California+Ave+SW+Seattle",
+  menu:"https://ladyjaye.com/order-online/",
+  tags:[["ok","✓ RESERVATION — 6:30 PM, party of 7"],["","smokehouse + butcher"]],
+  group:["<b>✓ We have a reservation: 6:30 PM, table for 7</b> — be on time.","The legendary <b>Wagyu smash burgers</b> — the whole point of this stop","<b>Smoked wings</b> + the <b>pimento fried-chicken sandwich</b>","Cocktail crew opens the <b>smoked Old Fashioned</b> tab"],
+  fact:{owner:"adan",title:"Easy Street Records (1988)",url:"https://en.wikipedia.org/wiki/Easy_Street_Records",
+    short:"The grunge cathedral half a block away at California & Alaska.",
+    long:"Easy Street Records at California & Alaska. Pearl Jam played a 200-person SURPRISE show inside on Apr 29, 2005 (a best-selling live EP). Outside walls carry murals of Chris Cornell & Mother Love Bone's Andy Wood. Holy ground for the Seattle sound."},
+  recs:{
+   adan:[["DRINK","<b>Dirty Copper</b> — single malt + Campari, smoky & bitter."],["EAT","<b>Smoked wings</b>."],["FACT","Easy Street is yours, steps away."]],
+   cris:[["DRINK","A draft or cocktail."],["EAT","The <b>Wagyu smash burger</b>."],["NOTE","All burger here."]],
+   fabri:[["DRINK","<b>Smoked Old Fashioned</b> (smoked rye + Demerara)."],["EAT","<b>Wagyu smash burger</b>."],["WIN","Old Fashioned #1 of two."]],
+   fede:[["DRINK","A clean lager / their beer."],["EAT","The <b>Wagyu smash burger</b> — THE one."],["GUIDE","This is the 6:30 booked stop."]],
+   jorge:[["DRINK","An IPA or a cocktail."],["EAT","<b>Wagyu smash burger</b>."],["VIBE","Butcher-shop meat sweats, earned."]],
+   manfred:[["DRINK","A bitter, spirit-forward pour."],["EAT","<b>Wagyu smash burger</b>."],["NOTE","Negroni next door."]],
+   victor:[["DRINK","A beer or the smoked Old Fashioned."],["EAT","<b>Pimento fried-chicken sandwich</b> — nailed it."],["NOTE","This stop was built for you."]]
+  }},
+
+ {id:"campwest",cls:"final",icon:"🏕️",pin:"4",type:"COCKTAIL FINALE",name:"Camp West",
+  addr:"4539 California Ave SW",time:"~7:30–close",
+  maps:"https://www.google.com/maps/search/?api=1&query=Camp+West+4539+California+Ave+SW+Seattle",
+  menu:"https://thecampwest.com/dine-in-menu/",
+  tags:[["res","WALK-IN ~7:30"],["age","21+"],["","cabin bar"]],
+  group:["You'll be full from Lady Jaye — make this <b>cocktails + dessert</b>","Roast <b>tableside s'mores</b> (their famous move — pick your chocolate)","Cocktail classics + the <b>70+ whiskey wall</b>; charcuterie only if still hungry"],
+  fact:{owner:"cris",title:"The 11 Junction Murals",url:"https://westseattleblog.com/west-seattle-101-the-murals/",
+    short:"The hand-painted murals all over these blocks.",
+    long:"11 historical murals (led by Earl Cruzen, painted 1989–93) cover Junction buildings — the old streetcar crossing and neighborhood scenes. The project won national Neighborhood of the Year in 1992. Look up while you drink."},
+  recs:{
+   adan:[["DRINK","A <b>peated single-malt pour</b> from 70+ expressions."],["EAT","The <b>charcuterie tackle box</b> — your perfect plate."],["FINALE","Basically your spirit animal."]],
+   cris:[["DRINK","A <b>Manhattan</b> (their award-winner)."],["EAT","<b>Delmonico steak bites</b>."],["FACT","You own the murals all around."]],
+   fabri:[["DRINK","<b>Classic Old Fashioned</b> — the purist version."],["EAT","<b>Beet hummus</b> (feta, za'atar)."],["WIN","Both Old Fashioneds. Done."]],
+   fede:[["DRINK","A cold draft or a classic cocktail."],["EAT","Share the <b>charcuterie tackle box</b>."],["GUIDE","Walk-in ~7:30 — call ahead if you can."]],
+   jorge:[["DRINK","A hoppy draft to wind down."],["EAT","Charcuterie + <b>s'mores</b>."],["VIBE","S'mores. Yes, you."]],
+   manfred:[["DRINK","<b>NEGRONI</b> — your drink, its best bar on the route."],["EAT","Charcuterie tackle box."],["WIN","The whole night pointed here for you."]],
+   victor:[["DRINK","A whiskey pour."],["EAT","<b>Chicken fillets</b> (or just dessert — see below)."],["NOTE","Cabin theme = group photos."]]
+  }},
+
+ {id:"beerjct",cls:"epi",icon:"🍺",pin:"★",type:"EPILOGUE · SEND-OFF",name:"The Beer Junction",
+  addr:"4511 California Ave SW",time:"after",
+  maps:"https://www.google.com/maps/search/?api=1&query=The+Beer+Junction+4511+California+Ave+SW+Seattle",
+  menu:"https://www.thebeerjunction.com/tap-list",
+  tags:[["","35+ taps · 1,000+ bottles"],["age","21+ · walk-in"]],
+  group:["<b>Buy beer to go</b> — grab bottles/cans to take home or split with the crew","One last pour off the 35+ taps + a snack (pretzel, Olli pack, corn nuts)","Toast the crawl — then scatter into the night"],
+  fact:{owner:"manfred",title:"Why it's 'The Junction'",url:"https://en.wikipedia.org/wiki/West_Seattle,_Seattle",
+    short:"Where two streetcar lines once crossed — the heart of West Seattle.",
+    long:"In 1907 two streetcar lines crossed at California & Alaska — the Fauntleroy line met the Admiral line. A swampy outpost became downtown West Seattle in a month. Cars ran till 1940; California Ave SW is still the 'spine of West Seattle.'"},
+  recs:{
+   adan:[["DRINK","A <b>nitro stout</b> to close."],["EAT","<b>Almonds / bar nuts</b>."],["WIN","Savory + stout, the perfect last call."]],
+   cris:[["DRINK","Hunt a malty <b>amber/red</b>."],["EAT","<b>Soft pretzel</b>."],["WIN","Your amber on a 35-tap menu."]],
+   fabri:[["DRINK","A fresh <b>IPA</b> off the wall."],["EAT","<b>Corn nuts</b>."],["NOTE","Beer to close."]],
+   fede:[["DRINK","A crisp <b>West Coast pilsner</b>."],["EAT","<b>Soft pretzel</b>."],["TOAST","Lead the toast. You ran this. 🍺"]],
+   jorge:[["DRINK","Hunt a true <b>hazy IPA</b> — THE place for it."],["EAT","<b>Corn nuts</b>."],["WIN","Your perfect hazy, always waiting here."]],
+   manfred:[["DRINK","A bitter Belgian or a final crisp pour."],["EAT","<b>Olli pack + corn nuts</b> = your pub mix."],["FACT","You own the send-off lore."]],
+   victor:[["DRINK","A real <b>Belgian witbier</b>."],["EAT","<b>Olli charcuterie pack</b>."],["WIN","Your exact style, off 35 taps."]]
+  }}
+];
+
+const LORE={owner:"fabri",title:"Birthplace of Seattle",url:"https://en.wikipedia.org/wiki/Alki_Point,_Seattle",
+  short:"Alki, just west of here, is where Seattle began.",
+  long:"The Dkhw'Duw'Absh (Duwamish) lived in cedar longhouses here for millennia. On Nov 13, 1851 the Denny Party landed at nearby Alki and named it 'New York Alki' — 'Alki' is Chinook for 'by and by / someday.'"};
+
+const WALKS={admiral:"🚶 WALK SOUTH ~1.2 mi / 25 min — the history leg",
+  elliott:"🚶 ~2 min back north (past Easy Street) to Lady Jaye",
+  ladyjaye:"🚶 1 block to Camp West",campwest:"🚶 1 block — the epilogue"};
+
+let cur="map";
+const $=id=>document.getElementById(id);
+function avHTML(p,cls,styleExtra){return `<div class="${cls}" style="--c:${p.color};${styleExtra||''}">
+  <img src="avatars/${p.id}.png" alt="" onload="this.parentNode.classList.add('imgok')" onerror="this.remove()">
+  <span class="ph">${ini(p.name)}</span></div>`;}
+
+/* animated walking scene */
+function sceneHTML(who){
+  const SC=[['tree','🌲','6%',26],['mountain','🏔️','27%',30],['needle','🗼','48%',30],['ferry','⛴️','67%',28],['tree','🌲','88%',24]];
+  const icos=SC.map(s=>`<span class="ico" style="left:${s[2]};bottom:40px;width:${s[3]}px;font-size:${s[3]}px"><img src="icons/${s[0]}.png" alt="" style="width:${s[3]}px;height:auto;display:block;image-rendering:pixelated" onerror="this.outerHTML='${s[1]}'"></span>`).join("");
+  let cast;
+  if(who==="crew"){
+    cast=`<div class="cast">`+PLAYERS.map((p,i)=>avHTML(p,"av s bob",`animation-delay:${(i*0.07).toFixed(2)}s`)).join("")+`</div>`;
+  }else{
+    const p=P(who);
+    cast=`<div class="cast solo">${avHTML(p,"av l bob")}</div><div class="label">▶ ${p.name.toUpperCase()} IS ON THE CRAWL</div>`;
+  }
+  return `<div class="scene">${icos}${cast}<div class="road"></div></div>`;
+}
+
+function buildSelect(){const s=$("player");PLAYERS.forEach(p=>{const o=document.createElement("option");o.value=p.id;o.textContent=p.name.toUpperCase();s.appendChild(o);});}
+function buildTabs(){
+  let h=`<div class="tab ${cur==='map'?'active':''}" onclick="go('map')">MAP</div>`;
+  STOPS.forEach((s,i)=>{
+    h+=`<div class="tab ${s.cls} ${cur===s.id?'active':''}" onclick="go('${s.id}')"><span class="b">${s.pin}</span>${s.name.toUpperCase()}</div>`;
+    if(i===0)h+=`<div class="tab ${cur==='history'?'active':''}" onclick="go('history')">HISTORY</div>`;
+  });
+  $("tabbar").innerHTML=h;
+}
+const HIST=[
+ {f:STOPS[0].fact,where:"Outside Admiral Pub · 2343 California"},
+ {f:STOPS[3].fact,where:"All along California Ave as you walk"},
+ {f:STOPS[2].fact,where:"California & Alaska"},
+ {f:STOPS[4].fact,where:"California & Alaska · the old Junction"},
+ {f:STOPS[1].fact,where:"4721 California · across from Elliott Bay"},
+ {f:LORE,where:"Alki Point · ~2 mi west · the origin"}
+];
+function historyHTML(who){
+  let pin="",list=HIST;
+  if(who!=="crew"){
+    const mine=HIST.find(it=>it.f.owner===who);
+    if(mine){pin=`<div class="pinfact"><div class="pinlab">★ ${P(who).name.toUpperCase()} — YOUR FACT TO SHARE</div><div class="lab" style="color:#1f5f9d;margin:0 0 3px">${mine.where}</div>${factHTML(mine.f,who,true)}</div>`;
+      list=HIST.filter(it=>it.f.owner!==who);}
+  }
+  const items=list.map(it=>`<div style="margin-bottom:6px"><div class="lab" style="color:#1f5f9d;margin:6px 0 3px">${it.where}</div>${factHTML(it.f,who,true)}</div>`).join("");
+  const intro=who==="crew"
+    ?`Most of the history hits on the long <b>Admiral → Junction</b> walk. Spot these in order — each guy owns one, so pick your name to pin yours up top.`
+    :`The rest of the walking tour (spot these in order):`;
+  return `${pin}<div class="route" style="margin-bottom:11px"><div class="rtitle pix">THE WALKING TOUR</div>
+    <p style="font-size:16px;color:#33421a;margin:0">${intro}</p></div>${items}`;
+}
+function factHTML(f,who,lore){
+  const o=P(f.owner),isOwner=who===o.id,txt=isOwner?f.long:f.short;
+  const tag=isOwner?"YOUR FACT TO SHARE":`Ask <b style="color:${o.color}">${o.name}</b>`;
+  const link=(isOwner&&f.url)?`<a class="learn" href="${f.url}" target="_blank">Learn more →</a>`:"";
+  return `<div class="factbox ${lore?'lore':''}"><div class="own" style="color:${o.color}">${tag}</div>
+    <div class="ttl">${f.title}</div><p>${txt}</p>${link}</div>`;
+}
+function stopHTML(s,who){
+  const tags=s.tags.map(t=>`<span class="tag ${t[0]}">${t[1]}</span>`).join("");
+  let mid;
+  if(who==="crew"){mid=`<div class="lab">▣ THE GROUP MOVE</div><ul class="bul">${s.group.map(b=>`<li>${b}</li>`).join("")}</ul>`;}
+  else{const r=s.recs[who]||[];mid=`<div class="lab">★ ${P(who).name.toUpperCase()}'S 3 MOVES</div><ul class="bul recs">${r.map((x,i)=>`<li><span class="num">${i+1}</span><span class="k">${x[0]}</span>${x[1]}</li>`).join("")}</ul>`;}
+  const wc=s.wc?`<div class="wcline"><span class="h">WORLD CUP</span>${s.wc}</div>`:"";
+  return `<div class="card ${s.cls}">
+    <div class="head"><span class="ic"><img src="icons/${s.id}.png" alt="" style="width:28px;height:28px;object-fit:contain;display:block;image-rendering:pixelated" onerror="this.outerHTML='${s.icon}'"></span><div><div class="nm">${s.name}</div><div class="ty">${s.type}</div></div><div class="tm">${s.time}</div></div>
+    <div class="inner"><div style="font-size:15px;color:#3a4a1c;margin-bottom:7px">${s.addr}</div>
+      <div class="links"><a href="${s.maps}" target="_blank">MAP</a><a href="${s.menu}" target="_blank">MENU</a></div>
+      <div class="tags">${tags}</div>${mid}
+      ${wc}</div></div>`;
+}
+function mapHTML(who){
+  let rows="";
+  STOPS.forEach(s=>{
+    rows+=`<div class="rrow ${s.cls}" onclick="go('${s.id}')"><div class="pin">${s.pin}</div><div><div class="nm">${s.name}</div><div class="tm">${s.time.replace('<br>',' ')} · ${s.type.split(' · ')[0]}</div></div></div>`;
+  });
+  return `<div class="route"><div class="rtitle pix">THE CRAWL PLAN</div>
+    ${rows}
+    <div class="legend"><span><i style="background:#ffd166"></i>warm-up</span><span><i style="background:#9cc9f2"></i>brewery</span>
+      <span><i style="background:#ff9b54"></i>food</span><span><i style="background:#c9a6ff"></i>finale</span><span><i style="background:#9be36b"></i>epilogue</span></div>
+  </div>`;
+}
+function render(){
+  const who=$("player").value,strip=$("pstrip");
+  if(who==="crew"){strip.className="pstrip";strip.innerHTML="";}
+  else{const p=P(who);strip.className="pstrip show";
+    strip.innerHTML=`${avHTML(p,"avatar bob")}<div><div class="nm pix" style="color:${p.color}">${p.name}${p.role?` · <span style="font-size:12px;color:var(--accent)">${p.role}</span>`:""}</div></div>`;}
+  buildTabs();
+  const main=cur==="map"?mapHTML(who):cur==="history"?historyHTML(who):stopHTML(STOPS.find(s=>s.id===cur),who);
+  $("body").innerHTML=sceneHTML(who)+main
+    +`<div class="footer">I <span style="color:var(--red)">♥</span> WEST SEATTLE</div>`;
+}
+function go(t){cur=t;render();}
+function onPlayer(){render();}
+buildSelect();render();
+</script>
+</body>
+</html>
